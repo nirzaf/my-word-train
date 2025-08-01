@@ -1,5 +1,5 @@
 export const GAME_CONFIG = {
-  TIME_LIMIT: 10, // seconds
+  TIME_LIMIT: 60, // seconds (1 minute)
   INITIAL_WORDS: ['apple', 'elephant', 'tiger', 'rainbow', 'ocean'],
   MIN_WORD_LENGTH: 2,
   MAX_WORD_LENGTH: 20,

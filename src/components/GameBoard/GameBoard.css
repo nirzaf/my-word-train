@@ -70,30 +70,36 @@
   align-items: center;
 }
 
-.game-display {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--spacing-xl);
-  align-items: start;
+.word-display-section {
   width: 100%;
-  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.input-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.input-with-timer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 600px;
 }
 
 .timer-section {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: var(--spacing-lg);
+  flex-shrink: 0;
 }
 
-.word-section {
+.user-input-section {
   flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.input-section {
-  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -107,19 +113,6 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .game-display {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    text-align: center;
-  }
-  
-  .timer-section {
-    order: -1;
-    padding-top: 0;
-  }
-}
-
 @media (max-width: 768px) {
   .game-board {
     padding: var(--spacing-md);
@@ -143,8 +136,18 @@
     gap: var(--spacing-lg);
   }
   
-  .game-display {
+  .input-with-timer {
+    flex-direction: column;
+    align-items: center;
     gap: var(--spacing-md);
+  }
+  
+  .timer-section {
+    order: -1;
+  }
+  
+  .user-input-section {
+    width: 100%;
   }
 }
 
@@ -175,7 +178,7 @@
   animation: fadeIn 0.5s ease-out;
 }
 
-.game-display {
+.word-display-section {
   animation: slideInLeft 0.4s ease-out;
 }
 
@@ -204,7 +207,7 @@
 }
 
 /* Hover effects for interactive elements */
-.game-display:hover .timer-section {
+.input-with-timer:hover .timer-section {
   transform: translateY(-2px);
   transition: transform var(--transition-normal);
 }
@@ -239,13 +242,13 @@
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .game-content,
-  .game-display,
+  .word-display-section,
   .input-section,
   .controls-section {
     animation: none;
   }
   
-  .game-display:hover .timer-section,
+  .input-with-timer:hover .timer-section,
   .game-board:focus-within .timer-section {
     transform: none;
   }
