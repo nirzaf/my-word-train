@@ -1,0 +1,233 @@
+.game-status {
+  width: 100%;
+  max-width: 600px;
+}
+
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  border-left: 4px solid transparent;
+}
+
+.status-card--info {
+  background: var(--bg-card);
+  border-left-color: var(--color-info);
+}
+
+.status-card--success {
+  background: rgba(34, 197, 94, 0.1);
+  border-left-color: var(--color-success);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-card--warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-left-color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-card--error {
+  background: rgba(239, 68, 68, 0.1);
+  border-left-color: var(--color-error);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-card--active {
+  background: rgba(100, 108, 255, 0.1);
+  border-left-color: var(--color-primary);
+  border: 1px solid rgba(100, 108, 255, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.status-card--waiting {
+  background: var(--bg-card);
+  border-left-color: var(--text-muted);
+}
+
+.status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.status-emoji {
+  font-size: var(--font-2xl);
+  display: block;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.status-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.status-message {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.status-details {
+  margin-top: var(--spacing-xs);
+}
+
+.player-indicator {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  display: inline-block;
+}
+
+.player-indicator--active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.player-indicator--waiting {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.error-details {
+  margin-top: var(--spacing-xs);
+}
+
+.error-details small {
+  color: var(--text-muted);
+  font-size: var(--font-xs);
+}
+
+/* Game Progress */
+.game-progress {
+  margin-top: var(--spacing-md);
+  background: var(--bg-card);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--spacing-sm);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-slow);
+}
+
+.progress-fill--human {
+  background: linear-gradient(90deg, var(--color-success), var(--color-primary));
+}
+
+.progress-fill--computer {
+  background: linear-gradient(90deg, var(--color-info), var(--color-secondary));
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.progress-label--active {
+  color: var(--color-primary);
+  font-weight: 700;
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .status-card {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+  
+  .status-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .status-emoji {
+    font-size: var(--font-xl);
+  }
+  
+  .status-message {
+    font-size: var(--font-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .status-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-md);
+  }
+  
+  .status-content {
+    align-items: center;
+  }
+  
+  .player-indicator {
+    text-align: center;
+  }
+}
+
+/* Hover effects */
+.status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Animation for status changes */
+.status-card {
+  animation: slideInLeft 0.3s ease-out;
+}

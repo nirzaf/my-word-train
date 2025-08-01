@@ -1,0 +1,252 @@
+.game-board {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  background: linear-gradient(
+    135deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 100%
+  );
+}
+
+.game-board-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+/* Header Section */
+.game-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.header-content {
+  max-width: 600px;
+}
+
+.game-title {
+  font-size: var(--font-4xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-md) 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-subtitle {
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Status Section */
+.status-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Main Game Content */
+.game-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.game-display {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+  width: 100%;
+  max-width: 800px;
+}
+
+.timer-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: var(--spacing-lg);
+}
+
+.word-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.input-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Controls Section */
+.controls-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .game-display {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .timer-section {
+    order: -1;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-board {
+    padding: var(--spacing-md);
+    align-items: flex-start;
+    min-height: auto;
+  }
+  
+  .game-board-container {
+    gap: var(--spacing-lg);
+  }
+  
+  .game-title {
+    font-size: var(--font-3xl);
+  }
+  
+  .game-subtitle {
+    font-size: var(--font-base);
+  }
+  
+  .game-content {
+    gap: var(--spacing-lg);
+  }
+  
+  .game-display {
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .game-board {
+    padding: var(--spacing-sm);
+  }
+  
+  .game-board-container {
+    gap: var(--spacing-md);
+  }
+  
+  .game-title {
+    font-size: var(--font-2xl);
+  }
+  
+  .game-subtitle {
+    font-size: var(--font-sm);
+  }
+  
+  .header-content {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+/* Animation for game state transitions */
+.game-content {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.game-display {
+  animation: slideInLeft 0.4s ease-out;
+}
+
+.input-section {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.controls-section {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Loading state */
+.game-board--loading {
+  pointer-events: none;
+}
+
+.game-board--loading .game-content {
+  opacity: 0.7;
+  transition: opacity var(--transition-normal);
+}
+
+/* Focus management for accessibility */
+.game-board:focus-within .timer-section {
+  transform: scale(1.05);
+  transition: transform var(--transition-normal);
+}
+
+/* Hover effects for interactive elements */
+.game-display:hover .timer-section {
+  transform: translateY(-2px);
+  transition: transform var(--transition-normal);
+}
+
+/* Background pattern for visual interest */
+.game-board::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(100, 108, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(97, 218, 251, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .game-title {
+    -webkit-text-fill-color: var(--text-primary);
+    background: none;
+  }
+  
+  .game-board::before {
+    display: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .game-content,
+  .game-display,
+  .input-section,
+  .controls-section {
+    animation: none;
+  }
+  
+  .game-display:hover .timer-section,
+  .game-board:focus-within .timer-section {
+    transform: none;
+  }
+}

@@ -1,0 +1,222 @@
+.word-display {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Current Word Section */
+.current-word-section {
+  text-align: center;
+}
+
+.current-word-label {
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+.current-word-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+  transition: all var(--transition-normal);
+}
+
+.current-word-container:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.current-word {
+  font-size: var(--font-4xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: var(--spacing-md);
+  text-transform: capitalize;
+}
+
+.next-letter-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.next-letter-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.next-letter {
+  background: var(--color-secondary);
+  color: var(--bg-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: var(--font-lg);
+  min-width: 32px;
+  text-align: center;
+}
+
+/* Word Chain Section */
+.word-chain-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.word-chain-label {
+  font-size: var(--font-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.word-chain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
+}
+
+.word-chain::-webkit-scrollbar {
+  width: 4px;
+}
+
+.word-chain::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.word-chain::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+}
+
+.word-chain-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  border-left: 3px solid transparent;
+}
+
+.word-chain-item--current {
+  background: var(--bg-input);
+  border-left-color: var(--color-primary);
+  transform: scale(1.02);
+}
+
+.word-chain-item--player {
+  border-left-color: var(--color-success);
+}
+
+.word-chain-item--computer {
+  border-left-color: var(--color-info);
+}
+
+.word-chain-item:hover {
+  background: var(--bg-input);
+  transform: translateX(4px);
+}
+
+.word-chain-number {
+  background: var(--text-muted);
+  color: var(--bg-primary);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.word-chain-word {
+  flex: 1;
+  font-size: var(--font-base);
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.word-chain-player {
+  font-size: var(--font-lg);
+  flex-shrink: 0;
+}
+
+/* Turn Indicator */
+.turn-indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.turn-badge {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  font-weight: 600;
+  font-size: var(--font-base);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: all var(--transition-normal);
+  animation: pulse 2s infinite;
+}
+
+.turn-badge--player {
+  background: var(--color-success);
+  color: white;
+}
+
+.turn-badge--computer {
+  background: var(--color-info);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .current-word {
+    font-size: var(--font-3xl);
+  }
+  
+  .current-word-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .word-chain {
+    max-height: 200px;
+  }
+  
+  .word-chain-item {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+  
+  .word-chain-word {
+    font-size: var(--font-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .current-word {
+    font-size: var(--font-2xl);
+  }
+  
+  .next-letter-hint {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+}

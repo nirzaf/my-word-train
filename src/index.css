@@ -1,0 +1,6 @@
+/* Import our custom styles */
+@import './styles/variables.css';
+@import './styles/globals.css';
+@import './styles/animations.css';
+
+/* Root styles are now handled in globals.css */
