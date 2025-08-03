@@ -1,4 +1,3 @@
-import { GeminiRequest, GeminiResponse, ApiError } from '../types/api';
 import { API_CONFIG } from '../utils/constants';
 import { isValidWordFormat, startsWithLetter } from '../utils/helpers';
 

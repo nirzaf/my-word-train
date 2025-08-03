@@ -1,4 +1,4 @@
-import { GameState, Player } from '../types/game';
+import type { GameState, Player } from '../types/game';
 import { getLastLetter, getRandomItem } from '../utils/helpers';
 import { GAME_CONFIG } from '../utils/constants';
 import { validateWord } from './wordValidation';
@@ -7,13 +7,13 @@ import { validateWord } from './wordValidation';
  * Initialize a new game state
  */
 export const initializeGame = (): GameState => {
-  const initialWord = getRandomItem(GAME_CONFIG.INITIAL_WORDS);
+  const initialWord = getRandomItem([...GAME_CONFIG.INITIAL_WORDS]);
   
   return {
     gameStatus: 'idle',
     currentPlayer: 'human',
-    wordChain: [initialWord],
-    currentWord: initialWord,
+    wordChain: [initialWord as string],
+    currentWord: initialWord as string,
     timeLeft: GAME_CONFIG.TIME_LIMIT,
     score: { player: 0, computer: 0 },
     isLoading: false,
@@ -102,14 +102,14 @@ export const endGameRound = (
  * Reset game for a new round
  */
 export const resetForNewRound = (gameState: GameState): GameState => {
-  const initialWord = getRandomItem(GAME_CONFIG.INITIAL_WORDS);
+  const initialWord = getRandomItem([...GAME_CONFIG.INITIAL_WORDS]);
   
   return {
     ...gameState,
     gameStatus: 'idle',
     currentPlayer: 'human',
-    wordChain: [initialWord],
-    currentWord: initialWord,
+    wordChain: [initialWord as string],
+    currentWord: initialWord as string,
     timeLeft: GAME_CONFIG.TIME_LIMIT,
     isLoading: false,
     error: null,

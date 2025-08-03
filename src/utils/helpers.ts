@@ -34,7 +34,7 @@ export const isValidWordFormat = (word: string): boolean => {
 /**
  * Get a random item from an array
  */
-export const getRandomItem = <T>(array: T[]): T => {
+export const getRandomItem = <T>(array: readonly T[] | T[]): T => {
   return array[Math.floor(Math.random() * array.length)];
 };
 

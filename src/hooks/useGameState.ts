@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { GameState, Player } from '../types/game';
+import type { GameState, Player } from '../types/game';
 import { initializeGame, startGame, addWordToChain, endGameRound, resetForNewRound } from '../services/gameLogic';
 import { getNextWord } from '../services/geminiApi';
 import { saveGameScore } from '../utils/storage';
