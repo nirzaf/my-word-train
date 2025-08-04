@@ -19,10 +19,10 @@ const WordDisplay: React.FC<WordDisplayProps> = ({
   const lastLetter = currentWord.slice(-1).toUpperCase();
   const wordChainRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom when new words are added
+  // Auto-scroll to top when new words are added
   useEffect(() => {
     if (wordChainRef.current) {
-      wordChainRef.current.scrollTop = wordChainRef.current.scrollHeight;
+      wordChainRef.current.scrollTop = 0;
     }
   }, [wordChain.length]);
   
@@ -48,13 +48,14 @@ const WordDisplay: React.FC<WordDisplayProps> = ({
           Word Chain ({wordChain.length} words)
         </h3>
         <div className="word-chain" ref={wordChainRef}>
-          {wordChain.map((word, index) => {
-            const isCurrentWord = index === wordChain.length - 1;
-            const isPlayerWord = index % 2 === 1; // Assuming first word is computer's
+          {[...wordChain].reverse().map((word, index, reversedChain) => {
+            const originalIndex = wordChain.length - 1 - index;
+            const isCurrentWord = originalIndex === wordChain.length - 1;
+            const isPlayerWord = originalIndex % 2 === 1; // Assuming first word is computer's
             
             return (
               <div
-                key={`${word}-${index}`}
+                key={`${word}-${originalIndex}`}
                 className={`word-chain-item ${
                   isCurrentWord ? 'word-chain-item--current' : ''
                 } ${
@@ -62,7 +63,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({
                 } animate-slideInLeft`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <span className="word-chain-number">{index + 1}</span>
+                <span className="word-chain-number">{originalIndex + 1}</span>
                 <span className="word-chain-word">{capitalize(word)}</span>
                 <span className="word-chain-player">
                   {isPlayerWord ? '👤' : '🤖'}

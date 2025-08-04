@@ -155,15 +155,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
         <div className="game-content">
           {gameState.gameStatus !== 'idle' && (
             <>
-              {/* Word Display */}
-              <div className="word-display-section">
-                <WordDisplay
-                  currentWord={gameState.currentWord}
-                  wordChain={gameState.wordChain}
-                  currentPlayer={gameState.currentPlayer}
-                />
-              </div>
-
               {/* User Input with Timer */}
               <div className="input-section">
                 <div className="input-with-timer">
@@ -183,6 +174,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* Word Display */}
+              <div className="word-display-section">
+                <WordDisplay
+                  currentWord={gameState.currentWord}
+                  wordChain={gameState.wordChain}
+                  currentPlayer={gameState.currentPlayer}
+                />
               </div>
             </>
           )}
