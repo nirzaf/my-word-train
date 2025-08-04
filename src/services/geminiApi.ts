@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import type { DifficultyLevel } from '../types/game';
+=======
+>>>>>>> 5ea8139b89ca235dc2cd1ba15dd57ed72145f10c
 import { API_CONFIG } from '../utils/constants';
 import { isValidWordFormat, startsWithLetter } from '../utils/helpers';
 import { DIFFICULTY_SETTINGS } from '../utils/powerUps';

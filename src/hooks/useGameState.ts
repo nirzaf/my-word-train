@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+<<<<<<< HEAD
 import type { GameState, Player, PowerUp, DifficultyLevel } from '../types/game';
 import { 
   initializeGame, 
@@ -13,6 +14,10 @@ import {
   canSkipTurn,
   useSkipTurn
 } from '../services/gameLogic';
+=======
+import type { GameState, Player } from '../types/game';
+import { initializeGame, startGame, addWordToChain, endGameRound, resetForNewRound } from '../services/gameLogic';
+>>>>>>> 5ea8139b89ca235dc2cd1ba15dd57ed72145f10c
 import { getNextWord } from '../services/geminiApi';
 import { saveGameScore } from '../utils/storage';
 import { saveToStorage, loadFromStorage } from '../utils/storage';
