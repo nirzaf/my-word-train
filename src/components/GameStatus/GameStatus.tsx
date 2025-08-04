@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameStatus as GameStatusType, Player } from '../../types/game';
+import type { GameStatus as GameStatusType, Player } from '../../types/game';
 import './GameStatus.css';
 
 interface GameStatusProps {

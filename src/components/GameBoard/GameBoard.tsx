@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGameState } from '../../hooks/useGameState';
 import { useTimer } from '../../hooks/useTimer';
 import { getExpectedFirstLetter } from '../../services/gameLogic';
@@ -8,6 +8,8 @@ import UserInput from '../UserInput';
 import Timer from '../Timer';
 import GameStatus from '../GameStatus';
 import GameControls from '../GameControls';
+import PowerUpBar from '../PowerUpBar';
+import PowerUpShop from '../PowerUpShop';
 import './GameBoard.css';
 
 interface GameBoardProps {
@@ -22,8 +24,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
     handleComputerTurn,
     handleTimeUp,
     resetGame,
-    clearError
+    clearError,
+    buyPowerUp,
+    activatePowerUp,
+    skipComputerTurn,
+    changeDifficulty: _changeDifficulty,
+    canSkipTurn,
+    isEasyModeActive: _isEasyModeActive
   } = useGameState();
+
+  const [isShopOpen, setIsShopOpen] = useState(false);
 
   const {
     timeLeft,
@@ -79,6 +89,28 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
   const handleWordSubmit = async (word: string) => {
     pauseTimer();
     await submitWord(word);
+  };
+
+  const handleOpenShop = () => {
+    setIsShopOpen(true);
+  };
+
+  const handleCloseShop = () => {
+    setIsShopOpen(false);
+  };
+
+  const handlePurchasePowerUp = (powerUp: any) => {
+    buyPowerUp(powerUp);
+  };
+
+  const handleUsePowerUp = (powerUp: any) => {
+    activatePowerUp(powerUp);
+  };
+
+  const handleSkipTurn = () => {
+    if (canSkipTurn()) {
+      skipComputerTurn();
+    }
   };
 
   const expectedFirstLetter = getExpectedFirstLetter(gameState);
@@ -156,6 +188,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
           )}
         </div>
 
+        {/* Power-Up Bar */}
+        <div className="power-up-section">
+          <PowerUpBar
+            wallet={gameState.wallet}
+            activePowerUps={gameState.activePowerUps}
+            onOpenShop={handleOpenShop}
+            onUsePowerUp={handleUsePowerUp}
+          />
+        </div>
+
         {/* Game Controls */}
         <div className="controls-section">
           <GameControls
@@ -164,8 +206,25 @@ const GameBoard: React.FC<GameBoardProps> = ({ className = '' }) => {
             onRestartGame={handleRestartGame}
             isLoading={gameState.isLoading}
           />
+          {gameState.gameStatus === 'playing' && gameState.currentPlayer === 'computer' && canSkipTurn() && (
+            <button 
+              className="skip-turn-btn"
+              onClick={handleSkipTurn}
+              title="Skip computer's turn"
+            >
+              ⏭️ Skip Turn
+            </button>
+          )}
         </div>
       </div>
+
+      {/* Power-Up Shop Modal */}
+      <PowerUpShop
+        isOpen={isShopOpen}
+        wallet={gameState.wallet}
+        onPurchase={handlePurchasePowerUp}
+        onClose={handleCloseShop}
+      />
     </div>
   );
 };

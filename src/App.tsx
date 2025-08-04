@@ -1,8 +1,6 @@
-import React from 'react';
 import GameBoard from './components/GameBoard';
 import ScoreBoard from './components/ScoreBoard';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import { loadGameScore } from './utils/storage';
 import './App.css';
 
 function App() {

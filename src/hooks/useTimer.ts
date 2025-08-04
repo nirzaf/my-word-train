@@ -9,7 +9,7 @@ interface UseTimerProps {
 export const useTimer = ({ initialTime, onTimeUp, autoStart = false }: UseTimerProps) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [isActive, setIsActive] = useState(autoStart);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
   const onTimeUpRef = useRef(onTimeUp);
 
   // Update the ref when onTimeUp changes

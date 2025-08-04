@@ -1,6 +1,7 @@
-import { GeminiRequest, GeminiResponse, ApiError } from '../types/api';
+import type { DifficultyLevel } from '../types/game';
 import { API_CONFIG } from '../utils/constants';
 import { isValidWordFormat, startsWithLetter } from '../utils/helpers';
+import { DIFFICULTY_SETTINGS } from '../utils/powerUps';
 
 // Note: In a real application, you would store the API key securely
 // For demo purposes, we'll use a placeholder
@@ -10,11 +11,16 @@ const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/
 /**
  * Generate a word using Google Gemini AI
  */
-export const getNextWord = async (lastWord: string, usedWords: string[] = []): Promise<string> => {
+export const getNextWord = async (
+  lastWord: string, 
+  usedWords: string[] = [], 
+  difficulty: DifficultyLevel = 'normal',
+  isEasyMode: boolean = false
+): Promise<string> => {
   const lastLetter = lastWord.slice(-1).toLowerCase();
   
   try {
-    const prompt = createPrompt(lastLetter, usedWords);
+    const prompt = createPrompt(lastLetter, usedWords, difficulty, isEasyMode);
     const response = await callGeminiAPI(prompt);
     
     const generatedWord = extractWordFromResponse(response);
@@ -45,17 +51,42 @@ export const getNextWord = async (lastWord: string, usedWords: string[] = []): P
 /**
  * Create a prompt for the Gemini AI
  */
-const createPrompt = (firstLetter: string, usedWords: string[]): string => {
+const createPrompt = (
+  firstLetter: string, 
+  usedWords: string[], 
+  difficulty: DifficultyLevel = 'normal',
+  isEasyMode: boolean = false
+): string => {
   const usedWordsText = usedWords.length > 0 
     ? `\nDo not use these already used words: ${usedWords.join(', ')}` 
     : '';
+  
+  // Determine word complexity based on difficulty and easy mode
+  const complexityLevel = DIFFICULTY_SETTINGS[isEasyMode ? 'easy' : difficulty].aiWordComplexity;
+  
+  let complexityInstructions = '';
+  if (complexityLevel <= 3) {
+    complexityInstructions = `
+- Use very simple, common words that children would know
+- Prefer 3-6 letter words
+- Use basic vocabulary`;
+  } else if (complexityLevel <= 6) {
+    complexityInstructions = `
+- Use moderately common words
+- Prefer 4-8 letter words
+- Use everyday vocabulary`;
+  } else {
+    complexityInstructions = `
+- Use challenging, sophisticated words
+- Can use 6-15 letter words
+- Use advanced vocabulary`;
+  }
     
   return `Generate a single English word that starts with the letter "${firstLetter.toUpperCase()}". 
 The word should be:
 - A common English word
-- Between 3-15 letters long
 - A noun, verb, or adjective
-- Not a proper noun
+- Not a proper noun${complexityInstructions}
 
 Respond with ONLY the word, nothing else.${usedWordsText}`;
 };
@@ -119,7 +150,10 @@ const extractWordFromResponse = (response: any): string => {
 /**
  * Fallback word generation when API fails
  */
-const getFallbackWord = (firstLetter: string, usedWords: string[]): string => {
+const getFallbackWord = (
+  firstLetter: string, 
+  usedWords: string[]
+): string => {
   // Simple fallback word lists for each letter
   const fallbackWords: Record<string, string[]> = {
     a: ['apple', 'animal', 'amazing', 'adventure', 'awesome'],

@@ -87,6 +87,7 @@
   max-height: 300px;
   overflow-y: auto;
   padding-right: var(--spacing-xs);
+  scroll-behavior: smooth;
 }
 
 .word-chain::-webkit-scrollbar {

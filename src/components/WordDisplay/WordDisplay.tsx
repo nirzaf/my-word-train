@@ -1,5 +1,5 @@
-import React from 'react';
-import { Player } from '../../types/game';
+import React, { useEffect, useRef } from 'react';
+import type { Player } from '../../types/game';
 import { capitalize } from '../../utils/helpers';
 import './WordDisplay.css';
 
@@ -17,6 +17,14 @@ const WordDisplay: React.FC<WordDisplayProps> = ({
   className = ''
 }) => {
   const lastLetter = currentWord.slice(-1).toUpperCase();
+  const wordChainRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new words are added
+  useEffect(() => {
+    if (wordChainRef.current) {
+      wordChainRef.current.scrollTop = wordChainRef.current.scrollHeight;
+    }
+  }, [wordChain.length]);
   
   return (
     <div className={`word-display ${className}`}>
@@ -39,7 +47,7 @@ const WordDisplay: React.FC<WordDisplayProps> = ({
         <h3 className="word-chain-label">
           Word Chain ({wordChain.length} words)
         </h3>
-        <div className="word-chain">
+        <div className="word-chain" ref={wordChainRef}>
           {wordChain.map((word, index) => {
             const isCurrentWord = index === wordChain.length - 1;
             const isPlayerWord = index % 2 === 1; // Assuming first word is computer's

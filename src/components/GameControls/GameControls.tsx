@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameStatus } from '../../types/game';
+import type { GameStatus } from '../../types/game';
 import './GameControls.css';
 
 interface GameControlsProps {
