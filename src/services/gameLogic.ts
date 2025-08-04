@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import type { GameState, Player, PowerUp, DifficultyLevel } from '../types/game';
-=======
-import type { GameState, Player } from '../types/game';
->>>>>>> 5ea8139b89ca235dc2cd1ba15dd57ed72145f10c
 import { getLastLetter, getRandomItem } from '../utils/helpers';
 import { GAME_CONFIG } from '../utils/constants';
 import { validateWord } from './wordValidation';
@@ -11,11 +7,7 @@ import { COIN_REWARDS, DIFFICULTY_SETTINGS } from '../utils/powerUps';
 /**
  * Initialize a new game state
  */
-<<<<<<< HEAD
 export const initializeGame = (difficulty: DifficultyLevel = 'normal'): GameState => {
-=======
-export const initializeGame = (): GameState => {
->>>>>>> 5ea8139b89ca235dc2cd1ba15dd57ed72145f10c
   const initialWord = getRandomItem([...GAME_CONFIG.INITIAL_WORDS]);
   
   return {
@@ -137,15 +129,9 @@ export const resetForNewRound = (gameState: GameState): GameState => {
     ...gameState,
     gameStatus: 'idle',
     currentPlayer: 'human',
-<<<<<<< HEAD
-    wordChain: [initialWord],
-    currentWord: initialWord,
-    timeLeft: gameState.baseTimeLimit,
-=======
     wordChain: [initialWord as string],
     currentWord: initialWord as string,
-    timeLeft: GAME_CONFIG.TIME_LIMIT,
->>>>>>> 5ea8139b89ca235dc2cd1ba15dd57ed72145f10c
+    timeLeft: gameState.baseTimeLimit,
     isLoading: false,
     error: null,
     // Clear active power-ups but preserve wallet and difficulty
